@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 "    ovirt.cluster = '#{@options[:ovirtcluster]}'"
         end
 "    ovirt.template = '#{@ovirt_base_template}'" %>
+        ovirt.console = 'vnc'
         ovirt.insecure = true
         ovirt.debug = true
     end
@@ -83,9 +84,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 <%   case selected_module.module_type
      when 'base' -%>
     <% if (@options.has_key? :ovirtuser) && (@options.has_key? :ovirtpass) %>   # TODO
-    <%= system.name %>.vm.hostname = '<%= "#{prefix}SecGen-#{selected_module.attributes['system_name']}_#{Time.new.strftime("%Y%m%d-%H%M")}" %>'
-    <%= system.name %>.vm.box = 'ovirt4' # TODO
-    <%= system.name %>.vm.box_url = ''   # TODO
+    <%= system.name %>.vm.hostname = '<%= "#{prefix}SecGen-#{selected_module.attributes['system_name']}-#{Time.new.strftime("%Y%m%d-%H%M")}" %>'
+    <%= system.name %>.vm.box = 'ovirt4'
+    <%= system.name %>.vm.box_url = 'https://github.com/myoung34/vagrant-ovirt4/blob/master/example_box/dummy.box?raw=true'
     <% else %>
     <%= system.name %>.vm.box = "<%= selected_module.module_path_name %>"
     <%= system.name %>.vm.box_url = "<%= selected_module.attributes['url'].first %>"
