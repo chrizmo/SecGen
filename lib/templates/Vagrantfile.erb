@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "<%= system.name %>" do |<%= system.name %>|
 <% if (@options.has_key? :ovirtuser) && (@options.has_key? :ovirtpass) %>
     #oVirt provider begin
-    config.vm.provider :ovirt4 do |ovirt|
+    <%= system.name %>.vm.provider :ovirt4 do |ovirt|
     <%=
 "    ovirt.username = '#{@options[:ovirtuser]}'
         ovirt.password = '#{@options[:ovirtpass]}'" %>
