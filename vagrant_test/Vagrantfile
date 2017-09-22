@@ -1,0 +1,20 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = 'ovirt4'
+  config.vm.hostname = "tomvmtesting"
+  config.vm.box_url = 'https://github.com/myoung34/vagrant-ovirt4/blob/master/example_box/dummy.box?raw=true'
+
+  config.vm.network :private_network,
+    :ovirt__network_name => 'service'
+
+  config.vm.provider :ovirt4 do |ovirt|
+    ovirt.url = 'https://aet-ovirt.aet.leedsbeckett.ac.uk/ovirt-engine/api'
+    ovirt.username = "shaw54@aet.leedsbeckett.ac.uk"
+    ovirt.password = "temppw15243#"
+    ovirt.insecure = true
+    ovirt.debug = true
+    ovirt.cluster = 'Default'
+    ovirt.console = 'vnc'
+    ovirt.template = 'debian_server'
+    ovirt.filtered_api = true
+  end
+end
